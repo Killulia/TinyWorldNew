@@ -1,14 +1,57 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.kingwag.tinyworld.view.fragment.MineMainFragment"
-    android:background="@color/saddlebrown">
+    tools:context="com.kingwag.tinyworld.view.fragment.MineMainFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:background="@color/white"
+        android:orientation="vertical">
 
-</FrameLayout>
+        <RelativeLayout
+            android:id="@+id/relativelayout_mine_first"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:background="@mipmap/ic_mine_user_bg"
+            android:gravity="center">
+
+            <ImageView
+                android:id="@+id/iv_login_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/mom_icon" />
+
+            <LinearLayout
+                android:id="@+id/linearlayout_mine_first"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iv_login_icon"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_login"
+                    android:layout_width="110dp"
+                    android:layout_height="25dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@color/white"
+                    android:text="@string/login" />
+
+                <Button
+                    android:id="@+id/btn_register"
+                    android:layout_width="110dp"
+                    android:layout_height="25dp"
+                    android:layout_marginLeft="5dp"
+                    android:background="@color/white"
+                    android:text="@string/register" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <include layout="@layout/item_fragment_mine" />
+    </LinearLayout>
+</ScrollView>
