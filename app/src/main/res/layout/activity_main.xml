@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kingwag.tinyworld.view.activity.MainActivity"
+    android:fitsSystemWindows="true">
+
+    <FrameLayout
+        android:id="@+id/frameLayout_main"
+        android:layout_marginBottom="50dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <RadioGroup
+        android:id="@+id/radioGroup_main"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/indexFragment_main"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/tab_index_dac"
+            android:text="@string/shouye"
+            android:gravity="center"
+            android:checked="true"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/shoppingFragment_main"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/tab_shopping_dac"
+            android:text="@string/shopping"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/mineFragment_main"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:drawableTop="@drawable/tab_mime_dac"
+            android:text="@string/mine"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+
+    </RadioGroup>
+</RelativeLayout>
