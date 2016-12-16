@@ -1,4 +1,4 @@
-package com.kingwag.tinyworld.view.fragment;
+package com.kingwag.tinyworld.view.view.fragment;
 
 
 import android.os.Bundle;
@@ -12,10 +12,10 @@ import com.kingwag.tinyworld.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoppingMainFragment extends Fragment {
+public class BaihuoFragment extends Fragment {
 
 
-    public ShoppingMainFragment() {
+    public BaihuoFragment() {
         // Required empty public constructor
     }
 
@@ -24,8 +24,7 @@ public class ShoppingMainFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View shopView = inflater.inflate(R.layout.shopping_none_login, container, false);
-        return shopView;
+        return inflater.inflate(R.layout.fragment_baihuo, container, false);
     }
 
 }

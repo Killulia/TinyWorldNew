@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/lightgray2"
     android:orientation="vertical"
-    tools:context="com.kingwag.tinyworld.view.activity.MineFragment_RegisterActivity">
+    tools:context=".view.view.activity.MineFragment_RegisterActivity">
 
     <RelativeLayout
         android:id="@+id/relativelayout_register"

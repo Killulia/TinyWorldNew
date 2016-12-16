@@ -2,8 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.view.fragment.ShoppingMainFragment"
-    android:background="@color/aqua">
+    android:background="@color/azure"
+    tools:context="com.kingwag.tinyworld.view.view.fragment.JinrituijianFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
