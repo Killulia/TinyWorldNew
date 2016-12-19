@@ -14,6 +14,9 @@ import com.kingwag.tinyworld.view.view.fragment.IndexMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.MineMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.ShoppingMainFragment;
 
+/**
+ * 主画面
+ */
 public class MainActivity extends AppCompatActivity {
     private Context mContext;
     private FrameLayout mFrameLayout_main;
