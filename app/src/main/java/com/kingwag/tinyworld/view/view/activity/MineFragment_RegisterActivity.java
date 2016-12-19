@@ -1,4 +1,4 @@
-package com.kingwag.tinyworld.view.activity;
+package com.kingwag.tinyworld.view.view.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

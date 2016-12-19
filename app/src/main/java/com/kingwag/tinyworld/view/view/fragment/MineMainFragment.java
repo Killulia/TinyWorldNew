@@ -1,4 +1,4 @@
-package com.kingwag.tinyworld.view.fragment;
+package com.kingwag.tinyworld.view.view.fragment;
 
 
 import android.content.Intent;
@@ -8,11 +8,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.kingwag.tinyworld.R;
-import com.kingwag.tinyworld.view.activity.MainActivity;
-import com.kingwag.tinyworld.view.activity.MineFragment_RegisterActivity;
+import com.kingwag.tinyworld.view.view.activity.MainActivity;
+import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.

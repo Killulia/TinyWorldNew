@@ -1,4 +1,4 @@
-package com.kingwag.tinyworld.view.activity;
+package com.kingwag.tinyworld.view.view.activity;
 
 
 import android.content.Context;
@@ -10,9 +10,9 @@ import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.kingwag.tinyworld.R;
-import com.kingwag.tinyworld.view.fragment.IndexMainFragment;
-import com.kingwag.tinyworld.view.fragment.MineMainFragment;
-import com.kingwag.tinyworld.view.fragment.ShoppingMainFragment;
+import com.kingwag.tinyworld.view.view.fragment.IndexMainFragment;
+import com.kingwag.tinyworld.view.view.fragment.MineMainFragment;
+import com.kingwag.tinyworld.view.view.fragment.ShoppingMainFragment;
 
 public class MainActivity extends AppCompatActivity {
     private Context mContext;

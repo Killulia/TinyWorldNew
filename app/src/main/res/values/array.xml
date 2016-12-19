@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tab_list">
+        <item>今日推荐</item>
+        <item>服装鞋包</item>
+        <item>美妆饰品</item>
+        <item>百货美食</item>
+        <item>手机数码</item>
+        <item>母婴用品</item>
+        <item>其他</item>
+    </string-array>
+
+</resources>
