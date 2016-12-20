@@ -16,7 +16,7 @@
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/iv_back"
+            android:id="@+id/iv_back_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@mipmap/back_dark"
@@ -36,7 +36,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
         android:background="@color/white">
 
         <TextView
@@ -141,5 +142,42 @@
             android:layout_centerVertical="true"
             />
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/btn_register"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@color/register"
+        android:text="@string/register"
+        android:textColor="@color/white"
+        />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agree_register"
+            android:layout_weight="1"
+            android:layout_marginLeft="80dp"
+            />
+        <TextView
+            android:id="@+id/tv_agree_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginRight="60dp"
+            android:layout_marginLeft="6dp"
+            android:text="@string/register_text"
+            android:singleLine="true"
+            android:textColor="@color/register"
+            />
+    </LinearLayout>
 
 </LinearLayout>

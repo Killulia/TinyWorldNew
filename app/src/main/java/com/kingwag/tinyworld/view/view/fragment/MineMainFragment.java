@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.view.activity.MainActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
+import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -55,6 +56,10 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            //登录按钮
+            case R.id.btn_login:
+                intent.setClass(getContext(), MyFragment_LoginActivity.class);
+                break;
             //注册按钮跳转
             case R.id.btn_register:
                 intent.setClass(getContext(), MineFragment_RegisterActivity.class);
