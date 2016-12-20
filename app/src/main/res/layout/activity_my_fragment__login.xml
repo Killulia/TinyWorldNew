@@ -7,6 +7,7 @@
     android:background="@color/lightgray2"
     android:orientation="vertical"
     tools:context=".view.view.activity.MineFragment_RegisterActivity">
+
     <RelativeLayout
         android:id="@+id/relativelayout_login"
         android:layout_width="match_parent"
@@ -91,7 +92,7 @@
             android:layout_toRightOf="@id/iv_icon_password_login"
             android:background="@null"
             android:layout_marginLeft="20dp"
-            android:inputType="phone" />
+            android:inputType="textPassword" />
 
 
     </RelativeLayout>

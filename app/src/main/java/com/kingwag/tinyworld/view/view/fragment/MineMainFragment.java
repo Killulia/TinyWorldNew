@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.view.activity.MainActivity;
+import com.kingwag.tinyworld.view.view.activity.MineFragment_OpinionActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
 import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
 
@@ -42,6 +43,8 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
         view.findViewById(R.id.btn_login).setOnClickListener(this);
         //注册按钮
         view.findViewById(R.id.btn_register).setOnClickListener(this);
+        //意见反馈
+        view.findViewById(R.id.relativelayout_suggestion).setOnClickListener(this);
     }
 
 
@@ -63,6 +66,10 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
             //注册按钮跳转
             case R.id.btn_register:
                 intent.setClass(getContext(), MineFragment_RegisterActivity.class);
+                break;
+            //意见反馈
+            case R.id.relativelayout_suggestion:
+                intent.setClass(getContext(), MineFragment_OpinionActivity.class);
                 break;
         }
         startActivity(intent);

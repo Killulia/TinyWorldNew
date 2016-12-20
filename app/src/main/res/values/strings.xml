@@ -73,6 +73,9 @@
     <string name="QQ">QQ</string>
     <string name="weixin">微信</string>
     <string name="weibo">微博</string>
+    <string name="commit">提交</string>
+    <string name="suggestion_longtext">您好，我们是小世界产品团队，您有任何想法及建议都可以反馈给我们，我们会在第一时间去改进！</string>
+    <string name="phont_number">手机号</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
