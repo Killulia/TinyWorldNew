@@ -12,7 +12,7 @@ import android.widget.RadioGroup;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.view.fragment.IndexMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.MineMainFragment;
-import com.kingwag.tinyworld.view.view.fragment.ShoppingMainFragment;
+import com.kingwag.tinyworld.view.view.fragment.ShoppingNoneFragment;
 
 /**
  * 主画面
@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction mFragmentTransaction;
     private FragmentManager mFragmentManager;
     private IndexMainFragment indexMainFragment;
-    private ShoppingMainFragment shoppingMainFragment;
+    private ShoppingNoneFragment shoppingMainFragment;
     private MineMainFragment mineMainFragment;
 
 
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         mFragmentTransaction.add(R.id.frameLayout_main, indexMainFragment, "indexMainFragment");
         mFragmentTransaction.show(indexMainFragment);
 
-        shoppingMainFragment = new ShoppingMainFragment();
+        shoppingMainFragment = new ShoppingNoneFragment();
         mFragmentTransaction.add(R.id.frameLayout_main, shoppingMainFragment, "shoppingMainFragment");
         mFragmentTransaction.hide(shoppingMainFragment);
 

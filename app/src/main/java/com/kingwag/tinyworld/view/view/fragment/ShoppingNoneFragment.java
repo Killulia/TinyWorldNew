@@ -12,10 +12,10 @@ import com.kingwag.tinyworld.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoppingMainFragment extends Fragment {
+public class ShoppingNoneFragment extends Fragment {
 
 
-    public ShoppingMainFragment() {
+    public ShoppingNoneFragment() {
         // Required empty public constructor
     }
 
