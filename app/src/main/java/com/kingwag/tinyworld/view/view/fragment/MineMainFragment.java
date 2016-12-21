@@ -1,6 +1,7 @@
 package com.kingwag.tinyworld.view.view.fragment;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,8 +9,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kingwag.tinyworld.R;
+import com.kingwag.tinyworld.view.utils.DataCleanManagerUtils;
 import com.kingwag.tinyworld.view.view.activity.MainActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_OpinionActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
@@ -20,7 +24,9 @@ import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
  */
 public class MineMainFragment extends Fragment implements View.OnClickListener{
 
-
+    private DataCleanManagerUtils dataCleanManagerUtils;//清除缓存工具类
+    private String cacheStr;//获取缓存大小
+    private TextView tvCache;//缓存大小显示的TextView
 
 
     public MineMainFragment() {
@@ -36,22 +42,49 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
 
     }
 
+
+
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
         //登录按钮
         view.findViewById(R.id.btn_login).setOnClickListener(this);
         //注册按钮
         view.findViewById(R.id.btn_register).setOnClickListener(this);
         //意见反馈
         view.findViewById(R.id.relativelayout_suggestion).setOnClickListener(this);
+        //清除缓存
+        view.findViewById(R.id.relativelayout_clear_cache).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dataCleanManagerUtils.clearAllCache(getContext());
+                dataCleanManagerUtils.cleanInternalCache(getContext());
+                try {
+                    cacheStr = dataCleanManagerUtils.getTotalCacheSize(getContext());
+                    tvCache = (TextView) view.findViewById(R.id.tv_cache);
+                    tvCache.setText(cacheStr);
+                    Toast.makeText(getContext(),"缓存清楚成功",Toast.LENGTH_SHORT).show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //显示缓存的方法
+        initCache(view);
     }
 
+    private void initCache(View view) {
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
+        try {
+            cacheStr =   dataCleanManagerUtils.getTotalCacheSize(getContext());
+            tvCache.setText(cacheStr);
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -71,6 +104,7 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
             case R.id.relativelayout_suggestion:
                 intent.setClass(getContext(), MineFragment_OpinionActivity.class);
                 break;
+
         }
         startActivity(intent);
     }
