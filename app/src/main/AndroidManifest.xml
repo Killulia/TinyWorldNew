@@ -23,8 +23,6 @@
         <activity android:name=".view.view.activity.MineFragment_RegisterActivity" />
         <activity android:name=".view.view.activity.MineFragment_RegisterAgreement" />
         <activity android:name=".view.view.activity.MyFragment_LoginActivity" />
-        <activity android:name=".view.view.activity.MineFragment_RegisterActivity" />
-        <activity android:name=".view.view.activity.MineFragment_RegisterAgreement" />
         <activity android:name=".view.view.activity.MineFragment_OpinionActivity"></activity>
     </application>
 

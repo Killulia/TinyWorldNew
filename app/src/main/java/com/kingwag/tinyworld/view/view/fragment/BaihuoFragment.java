@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.kingwag.tinyworld.R;
 
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -24,6 +25,14 @@ public class BaihuoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+/*
+
+        Retrofit retrofit = null;
+        SWFDSFDSF ss = retrofit.create(SWFDSFDSF.class);
+        ss.getJinRiBean(URLConstant.PAS_UR, "", "");
+
+*/
+
         return inflater.inflate(R.layout.fragment_baihuo, container, false);
     }
 
