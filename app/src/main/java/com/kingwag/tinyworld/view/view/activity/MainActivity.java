@@ -6,13 +6,13 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.view.fragment.IndexMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.MineMainFragment;
+import com.kingwag.tinyworld.view.view.fragment.ShoppingLoginedFragment;
 import com.kingwag.tinyworld.view.view.fragment.ShoppingNoneFragment;
 
 /**
@@ -26,7 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentTransaction mFragmentTransaction;
     private FragmentManager mFragmentManager;
     private IndexMainFragment indexMainFragment;
-    private ShoppingNoneFragment shoppingMainFragment;
+    private ShoppingNoneFragment shoppingNoneFragment;
+    private ShoppingLoginedFragment shoppingLoginedFragment;
     private MineMainFragment mineMainFragment;
 
 
@@ -52,9 +53,14 @@ public class MainActivity extends AppCompatActivity {
         mFragmentTransaction.add(R.id.frameLayout_main, indexMainFragment, "indexMainFragment");
         mFragmentTransaction.show(indexMainFragment);
 
-        shoppingMainFragment = new ShoppingNoneFragment();
-        mFragmentTransaction.add(R.id.frameLayout_main, shoppingMainFragment, "shoppingMainFragment");
-        mFragmentTransaction.hide(shoppingMainFragment);
+        shoppingNoneFragment = new ShoppingNoneFragment();
+        mFragmentTransaction.add(R.id.frameLayout_main, shoppingNoneFragment, "shoppingNoneFragment");
+        mFragmentTransaction.hide(shoppingNoneFragment);
+
+        //测试用的已登录购物车界面
+        shoppingLoginedFragment = new ShoppingLoginedFragment();
+        mFragmentTransaction.add(R.id.frameLayout_main, shoppingLoginedFragment, "shoppingLoginedFragment");
+        mFragmentTransaction.hide(shoppingLoginedFragment);
 
         mineMainFragment = new MineMainFragment();
         mFragmentTransaction.add(R.id.frameLayout_main, mineMainFragment, "  mineMainFragment");
@@ -68,21 +74,23 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.indexFragment_main:
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.show(indexMainFragment);
-                        mFragmentTransaction.hide(shoppingMainFragment);
+                        //测试暂时换成已登录
+                        mFragmentTransaction.hide(shoppingLoginedFragment);
                         mFragmentTransaction.hide(mineMainFragment);
                         mFragmentTransaction.commit();
                         break;
                     case R.id.shoppingFragment_main:
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.hide(indexMainFragment);
-                        mFragmentTransaction.show(shoppingMainFragment);
+                        //测试暂时换成已登录
+                        mFragmentTransaction.show(shoppingLoginedFragment);
                         mFragmentTransaction.hide(mineMainFragment);
                         mFragmentTransaction.commit();
                         break;
                     case R.id.mineFragment_main:
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.hide(indexMainFragment);
-                        mFragmentTransaction.hide(shoppingMainFragment);
+                        mFragmentTransaction.hide(shoppingNoneFragment);
                         mFragmentTransaction.show(mineMainFragment);
                         mFragmentTransaction.commit();
                         break;

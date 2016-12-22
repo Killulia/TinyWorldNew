@@ -24,7 +24,7 @@ public class ShoppingNoneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View shopView = inflater.inflate(R.layout.shopping_none_login, container, false);
+        View shopView = inflater.inflate(R.layout.shopping_has_login, container, false);
         return shopView;
     }
 
