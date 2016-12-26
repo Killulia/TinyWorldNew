@@ -10,6 +10,16 @@ public class StoreInfo
 	protected String Id;
 	protected String name;
 	protected boolean isChoosed;
+	private boolean isEdtor;
+
+	public boolean isEdtor() {
+		return isEdtor;
+	}
+
+	public void setEdtor(boolean edtor) {
+		isEdtor = edtor;
+	}
+
 	//后加的子项集合
 	private List<GoodsInfo> goodsInfos;
 

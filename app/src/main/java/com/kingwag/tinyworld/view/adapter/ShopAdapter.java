@@ -1,6 +1,11 @@
 package com.kingwag.tinyworld.view.adapter;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.StrikethroughSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,12 +13,15 @@ import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.GoodsInfo;
 import com.kingwag.tinyworld.view.bean.StoreInfo;
+import com.kingwag.tinyworld.view.view.CustomDialog;
 
 import java.util.List;
 
@@ -27,14 +35,31 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     private Context context;
     private LayoutInflater inflater;
     private CheckInterface checkInterface;
+    private GroupEdtorListener mListener;
+    private ModifyCountInterface modifyCountInterface;
+
+
+
     public ShopAdapter(Context context, List<StoreInfo> storeInfos) {
         this.context = context;
         this.storeInfos = storeInfos;
         inflater = LayoutInflater.from(context);
     }
 
-    public void setCheckInterface(CheckInterface checkInterface){
+    public void setCheckInterface(CheckInterface checkInterface) {
         this.checkInterface = checkInterface;
+    }
+
+    public void setModifyCountInterface(ModifyCountInterface modifyCountInterface) {
+        this.modifyCountInterface = modifyCountInterface;
+    }
+
+    public GroupEdtorListener getmListener() {
+        return mListener;
+    }
+
+    public void setmListener(GroupEdtorListener mListener) {
+        this.mListener = mListener;
     }
 
     @Override
@@ -74,12 +99,12 @@ public class ShopAdapter extends BaseExpandableListAdapter {
 
     @Override
     public View getGroupView(final int groupPosition, boolean b, View view, ViewGroup viewGroup) {
-        GroupHolder groupHolder = null;
+        final GroupHolder groupHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.item_shopcart_group, viewGroup, false);
             groupHolder = new GroupHolder(view);
             view.setTag(groupHolder);
-        }else {
+        } else {
             groupHolder = (GroupHolder) view.getTag();
         }
         final StoreInfo storeInfo = storeInfos.get(groupPosition);
@@ -89,36 +114,81 @@ public class ShopAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 storeInfo.setChoosed(!storeInfo.isChoosed());
-                checkInterface.checkGroup(groupPosition,((CheckBox)view).isChecked());
+                checkInterface.checkGroup(groupPosition, ((CheckBox) view).isChecked());
             }
         });
+        if (storeInfo.isEdtor()) {
+            groupHolder.groupEdit.setText("完成");
+        } else {
+            groupHolder.groupEdit.setText("编辑");
+        }
+        groupHolder.groupEdit.setOnClickListener(new GroupViewClick(groupPosition, groupHolder.groupEdit, storeInfo));
+        notifyDataSetChanged();
         return view;
     }
 
     @Override
     public View getChildView(final int groupPosition, final int childPosition, boolean b, View view, ViewGroup viewGroup) {
-        ChildHolder childHolder = null;
-        if (view == null){
+        final ChildHolder childHolder;
+        if (view == null) {
             view = inflater.inflate(R.layout.item_shopcart_product, viewGroup, false);
             childHolder = new ChildHolder(view);
             view.setTag(childHolder);
-        }else {
+        } else {
             childHolder = (ChildHolder) view.getTag();
+        }
+        if (storeInfos.get(groupPosition).isEdtor() == true) {
+            childHolder.llEdit.setVisibility(View.VISIBLE);
+            childHolder.llnoEdit.setVisibility(View.GONE);
+        } else {
+            childHolder.llEdit.setVisibility(View.GONE);
+            childHolder.llnoEdit.setVisibility(View.VISIBLE);
         }
         final GoodsInfo goodsInfo = storeInfos.get(groupPosition).getGoodsInfos().get(childPosition);
         if (goodsInfo != null) {
             childHolder.goosIcon.setImageResource(goodsInfo.getGoodsImg());
             childHolder.descripTxt.setText(goodsInfo.getDesc());
             childHolder.styleTxt.setText("颜色：" + goodsInfo.getColor() + "," + "尺码：" + goodsInfo.getSize() + "瓶/斤");
-            childHolder.priceTxt.setText("￥"+ String.valueOf(goodsInfo.getPrice()));
-            childHolder.discountTxt.setText("￥"+ String.valueOf(goodsInfo.getDiscountPrice()));
-            childHolder.numTxt.setText("x"+goodsInfo.getCount());
+            childHolder.priceTxt.setText("￥" + String.valueOf(goodsInfo.getPrice()));
+            SpannableString spanString = new SpannableString("￥" + String.valueOf(goodsInfo.getDiscountPrice()));
+            StrikethroughSpan span = new StrikethroughSpan();
+            spanString.setSpan(span, 0, String.valueOf(goodsInfo.getDiscountPrice()).length() + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            //避免无限次的appand
+            if (childHolder.discountTxt.getText().toString().length() > 0) {
+                childHolder.discountTxt.setText("");
+            }
+            childHolder.discountTxt.append(spanString);
+            childHolder.numTxt.setText("x" + goodsInfo.getCount());
             childHolder.childCheck.setChecked(goodsInfo.isChoosed());
             childHolder.childCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     goodsInfo.setChoosed(!goodsInfo.isChoosed());
-                    checkInterface.checkChild(groupPosition,childPosition,((CheckBox)view).isChecked());
+                    checkInterface.checkChild(groupPosition, childPosition, ((CheckBox) view).isChecked());
+                }
+            });
+            childHolder.tvAdd.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    modifyCountInterface.doIncrease(groupPosition, childPosition, childHolder.tvNum, childHolder.childCheck.isChecked());
+                }
+            });
+            childHolder.tvReduce.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    modifyCountInterface.doDecrease(groupPosition, childPosition, childHolder.tvNum, childHolder.childCheck.isChecked());
+                }
+            });
+            childHolder.tvDelete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    new CustomDialog(context) {
+                        @Override
+                        public void out() {
+                            modifyCountInterface.childDelete(groupPosition, childPosition);
+                            dismiss();
+                        }
+                    }.show();
                 }
             });
         }
@@ -129,9 +199,6 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int i, int i1) {
         return false;
     }
-
-
-
 
 
     /**
@@ -157,9 +224,80 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     }
 
     /**
+     * 监听编辑状态
+     */
+    public interface GroupEdtorListener {
+        void groupEdit(int groupPosition);
+    }
+
+    /**
+     * 使某个组处于编辑状态
+     * <p/>
+     * groupPosition组的位置
+     */
+    class GroupViewClick implements View.OnClickListener {
+        private int groupPosition;
+        private Button edtor;
+        private StoreInfo group;
+
+        public GroupViewClick(int groupPosition, Button edtor, StoreInfo group) {
+            this.groupPosition = groupPosition;
+            this.edtor = edtor;
+            this.group = group;
+        }
+
+        @Override
+        public void onClick(View v) {
+            int groupId = v.getId();
+            if (groupId == edtor.getId()) {
+                if (group.isEdtor()) {
+                    group.setEdtor(false);
+                } else {
+                    group.setEdtor(true);
+
+                }
+                notifyDataSetChanged();
+            }
+        }
+    }
+
+    /**
+     * 改变数量的接口
+     */
+    public interface ModifyCountInterface {
+        /**
+         * 增加操作
+         *
+         * @param groupPosition 组元素位置
+         * @param childPosition 子元素位置
+         * @param showCountView 用于展示变化后数量的View
+         * @param isChecked     子元素选中与否
+         */
+        void doIncrease(int groupPosition, int childPosition, View showCountView, boolean isChecked);
+
+        /**
+         * 删减操作
+         *
+         * @param groupPosition 组元素位置
+         * @param childPosition 子元素位置
+         * @param showCountView 用于展示变化后数量的View
+         * @param isChecked     子元素选中与否
+         */
+        void doDecrease(int groupPosition, int childPosition, View showCountView, boolean isChecked);
+
+        /**
+         * 删除子item
+         *
+         * @param groupPosition
+         * @param childPosition
+         */
+        void childDelete(int groupPosition, int childPosition);
+    }
+
+    /**
      * StoreInfo组的ViewHolder
      */
-    static class GroupHolder{
+    static class GroupHolder {
 
         CheckBox groupCheck;
         TextView groupName;
@@ -175,7 +313,7 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     /**
      * GoodsInfo子项的ViewHolder
      */
-    static class ChildHolder{
+    static class ChildHolder {
 
         CheckBox childCheck;
         ImageView goosIcon;
@@ -184,6 +322,12 @@ public class ShopAdapter extends BaseExpandableListAdapter {
         TextView priceTxt;
         TextView discountTxt;
         TextView numTxt;
+        RelativeLayout llnoEdit;
+        LinearLayout llEdit;
+        TextView tvReduce;
+        TextView tvAdd;
+        TextView tvDelete;
+        TextView tvNum;
 
         public ChildHolder(View rootView) {
             childCheck = (CheckBox) rootView.findViewById(R.id.check_box);
@@ -193,6 +337,12 @@ public class ShopAdapter extends BaseExpandableListAdapter {
             priceTxt = (TextView) rootView.findViewById(R.id.tv_price);
             discountTxt = (TextView) rootView.findViewById(R.id.tv_discount_price);
             numTxt = (TextView) rootView.findViewById(R.id.tv_buy_num);
+            llnoEdit = (RelativeLayout) rootView.findViewById(R.id.rl_no_edtor);
+            llEdit = (LinearLayout) rootView.findViewById(R.id.ll_edtor);
+            tvAdd = (TextView) rootView.findViewById(R.id.tv_add);
+            tvReduce = (TextView) rootView.findViewById(R.id.tv_reduce);
+            tvDelete = (TextView) rootView.findViewById(R.id.tv_goods_delete);
+            tvNum = (TextView) rootView.findViewById(R.id.tv_num);
         }
     }
 
