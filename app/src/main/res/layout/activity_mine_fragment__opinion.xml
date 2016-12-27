@@ -31,6 +31,7 @@
             android:layout_centerVertical="true"
             android:textSize="16sp" />
         <TextView
+            android:id="@+id/tv_suggestion_commit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
@@ -50,21 +51,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        >
+        android:weightSum="1">
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:src="@mipmap/suggestion_logo_icon"
             />
-        <TextView
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/suggestion_longtext"
-            android:textSize="18sp"
-            android:layout_margin="10dp"
-            android:textStyle="italic"
-            />
+           android:src="@mipmap/suggetsion_tip"
+            android:layout_gravity="center"
+            android:layout_weight="0.39" />
 
     </LinearLayout>
 
