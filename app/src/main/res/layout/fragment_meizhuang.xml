@@ -1,14 +1,73 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
-    tools:context="com.kingwag.tinyworld.view.view.fragment.MeizhuangFragment">
-
-    <!-- TODO: Update blank fragment layout -->
+    android:fitsSystemWindows="true">
     <TextView
+        android:id="@+id/textview_fuzhuang1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="1dp"
+        android:background="@color/table_background"/>
+    <RadioGroup
+        android:id="@+id/radioGroup_fuzhuang"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <RadioButton
+            android:id="@+id/zonghe_fuzhuang"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="综合排序"
+            android:textColor="@color/red"
+            android:gravity="center"
+            android:checked="true"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/zhekou_fuzhuang"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="折扣力度"
+            android:drawableRight="@mipmap/shop_sort_def"
+            android:paddingRight="25dp"
+            android:paddingLeft="25dp"
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/jiage_fuzhuang"
+            android:button="@null"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="价格"
+            android:drawableRight="@mipmap/shop_sort_def"
+            android:paddingRight="40dp"
+            android:paddingLeft="40dp"
+
+            android:gravity="center"
+            android:layout_height="wrap_content" />
+    </RadioGroup>
+    <TextView
+        android:id="@+id/textview_fuzhuang"
+        android:layout_below="@+id/radioGroup_fuzhuang"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/table_background"/>
+
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:layout_below="@+id/textview_fuzhuang"
+        android:id="@+id/xrecycler_fuzhuang"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:id="@+id/progressbar_fuzhuang"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

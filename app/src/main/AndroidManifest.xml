@@ -25,7 +25,9 @@
         <activity android:name=".view.view.activity.MineFragment_RegisterActivity" />
         <activity android:name=".view.view.activity.MineFragment_RegisterAgreement" />
         <activity android:name=".view.view.activity.MyFragment_LoginActivity" />
-        <activity android:name=".view.view.activity.MineFragment_OpinionActivity"></activity>
+        <activity android:name=".view.view.activity.MineFragment_OpinionActivity" />
+        <activity android:name=".view.view.activity.ItemTwoActivity" />
+        <activity android:name=".view.view.activity.ItemTwoTwoActivity"></activity>
     </application>
 
 </manifest>

@@ -3,7 +3,8 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="170dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    android:background="@drawable/other_bac">
     <ImageView
         android:id="@+id/imageview_three_jinri"
         android:layout_width="0dp"
@@ -35,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+
             >
             <TextView
                 android:id="@+id/textview_three2_jinri"

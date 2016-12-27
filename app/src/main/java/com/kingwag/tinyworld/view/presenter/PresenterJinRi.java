@@ -30,19 +30,18 @@ public class PresenterJinRi implements IPresenterJinRi{
                     @Override
                     public void onCompleted() {
                         iView.showProgress();
-                        Log.e("tag","-----------------chenggong");
+                        Log.e("tag","成功");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("tag","-----------------shibai");
+                        Log.e("tag","失败");
                     }
 
                     @Override
                     public void onNext(JinRiBean jinRiBean) {
-
                         iView.loadData(jinRiBean);
-                        Log.e("ajinRiBean", jinRiBean+"");
+
                     }
                 });
 

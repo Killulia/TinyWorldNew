@@ -78,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentTransaction.hide(shoppingLoginedFragment);
                         mFragmentTransaction.hide(mineMainFragment);
                         mFragmentTransaction.commit();
+
+                        radioButton_index_main.setTextColor(getResources().getColor(R.color.red));
+                        radioButton_mine_main.setTextColor(getResources().getColor(R.color.gray));
+                        radioButton_shopping_main.setTextColor(getResources().getColor(R.color.gray));
                         break;
                     case R.id.shoppingFragment_main:
                         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -86,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentTransaction.show(shoppingLoginedFragment);
                         mFragmentTransaction.hide(mineMainFragment);
                         mFragmentTransaction.commit();
+
+                        radioButton_index_main.setTextColor(getResources().getColor(R.color.gray));
+                        radioButton_mine_main.setTextColor(getResources().getColor(R.color.gray));
+                        radioButton_shopping_main.setTextColor(getResources().getColor(R.color.red));
                         break;
                     case R.id.mineFragment_main:
                         mFragmentTransaction = mFragmentManager.beginTransaction();
@@ -93,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentTransaction.hide(shoppingNoneFragment);
                         mFragmentTransaction.show(mineMainFragment);
                         mFragmentTransaction.commit();
+
+                        radioButton_index_main.setTextColor(getResources().getColor(R.color.gray));
+                        radioButton_mine_main.setTextColor(getResources().getColor(R.color.red));
+                        radioButton_shopping_main.setTextColor(getResources().getColor(R.color.gray));
                         break;
                 }
             }

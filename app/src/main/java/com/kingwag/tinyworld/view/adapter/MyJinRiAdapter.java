@@ -1,6 +1,7 @@
 package com.kingwag.tinyworld.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.OrientationHelper;
@@ -15,6 +16,7 @@ import com.bumptech.glide.Glide;
 import com.jude.rollviewpager.RollPagerView;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.JinRiBean;
+import com.kingwag.tinyworld.view.view.activity.ItemTwoActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -116,6 +118,12 @@ public class MyJinRiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             recyclerView= (RecyclerView) itemView.findViewById(R.id.recycler_jinri_two);
             recyclerView.setLayoutManager(new GridLayoutManager(context,3,OrientationHelper.VERTICAL,false));
             recyclerView.setAdapter(new MyJinRiTwoAdapter(couponBannersBeanList,context));
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });
 
         }
         public void setData(List<JinRiBean.ResultBean.CouponBannersBean>newlist2){
@@ -123,6 +131,7 @@ public class MyJinRiAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             couponBannersBeanList.addAll(newlist2);
             recyclerView.getAdapter().notifyDataSetChanged();
         }
+
 
     }
 

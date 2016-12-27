@@ -28,6 +28,7 @@
             android:layout_weight="1"
             android:drawableTop="@drawable/tab_index_dac"
             android:text="@string/shouye"
+            android:textColor="@color/red"
             android:gravity="center"
             android:checked="true"
             android:layout_height="wrap_content" />

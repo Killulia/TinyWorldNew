@@ -1,30 +1,216 @@
 package com.kingwag.tinyworld.view.view.fragment;
 
 
+import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.OrientationHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import com.jcodecraeer.xrecyclerview.XRecyclerView;
 import com.kingwag.tinyworld.R;
+import com.kingwag.tinyworld.view.adapter.MyFuZhuangAdapter;
+import com.kingwag.tinyworld.view.bean.FuzhuangBean;
+import com.kingwag.tinyworld.view.presenter.PresenterFuZhuang;
+import com.kingwag.tinyworld.view.utils.URLConstant;
+import com.kingwag.tinyworld.view.view.interfacese.IFuzhuangView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ShoujiFragment extends Fragment {
+public class ShoujiFragment extends Fragment implements View.OnClickListener,IFuzhuangView{
 
+    private Context context;
+    private XRecyclerView xRecyclerView;
+    private RadioGroup radioGroup;
+    private RadioButton radioButton_zonghe,radioButton_zhekou,radioButton_jiage;
+    private boolean state1=false;
+    private boolean state2=false;
+    private List<Object> objectList=new ArrayList<>();
+    private MyFuZhuangAdapter fuZhuangAdapter;
+    private ProgressBar progressBar;
+    private List<FuzhuangBean.ResultBean.CouponBean>couponBeen=new ArrayList<>();
+    private PresenterFuZhuang presenterFuZhuang;
+    private String stringUrl1;
+    private String stringUrl2;
+    private String stringUrl3;
+    private String stringUrl4;
+    private String stringUrl5;
 
-    public ShoujiFragment() {
-        // Required empty public constructor
+    private  FuzhuangBean mBean;
+    private int page = 1;
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        context=getContext();
+        stringUrl1 = String.format(URLConstant.BAIHUO_URL,"00000000-0931-3212-08c3-a64e2ad2a501&_app=xiaoshijie&_atype=android&_network=2&_networkType=0&_t=1481114428&_swidth=720&_imei=864394010789032&_manufacture=Samsung&_model=Note7&_osver=4.4.2&_tn=0&_st=0&versionName=1.7.3.0&_channel=xiaoshijie&_av=173&cat=3&_at=1b4b7cbad4e42c7aa565f3af65a69c81&");
+        //下
+        stringUrl2=String.format(URLConstant.BAIHUO_URL,"00000000-0931-3212-08c3-a64e2ad2a501&_app=xiaoshijie&_atype=android&_network=2&_networkType=0&_t=1481114763&_swidth=720&_imei=864394010789032&_manufacture=Samsung&_model=Note7&_osver=4.4.2&_tn=0&_st=0&versionName=1.7.3.0&_channel=xiaoshijie&_av=173&cat=3&sort=1&_at=21093612a315c81f9f6ea22130c98561&");
+        //上
+        stringUrl3=String.format(URLConstant.BAIHUO_URL,"00000000-0931-3212-08c3-a64e2ad2a501&_app=xiaoshijie&_atype=android&_network=2&_networkType=0&_t=1481114975&_swidth=720&_imei=864394010789032&_manufacture=Samsung&_model=Note7&_osver=4.4.2&_tn=0&_st=0&versionName=1.7.3.0&_channel=xiaoshijie&_av=173&cat=3&sort=2&_at=89328b7254647d080c4623438b32abfc&");
+        //上
+        stringUrl4=String.format(URLConstant.BAIHUO_URL,"00000000-0931-3212-08c3-a64e2ad2a501&_app=xiaoshijie&_atype=android&_network=2&_networkType=0&_t=1481115417&_swidth=720&_imei=864394010789032&_manufacture=Samsung&_model=Note7&_osver=4.4.2&_tn=0&_st=0&versionName=1.7.3.0&_channel=xiaoshijie&_av=173&cat=3&sort=4&_at=ab1403d1dfb84d5e79beef77675d786b&");
+        //下
+        stringUrl5=String.format(URLConstant.BAIHUO_URL,"00000000-0931-3212-08c3-a64e2ad2a501&_app=xiaoshijie&_atype=android&_network=2&_networkType=0&_t=1481115563&_swidth=720&_imei=864394010789032&_manufacture=Samsung&_model=Note7&_osver=4.4.2&_tn=0&_st=0&versionName=1.7.3.0&_channel=xiaoshijie&_av=173&cat=3&sort=3&_at=8362c3d8d9944ba130efef8c4259c975&");
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shouji, container, false);
+
+        return inflater.inflate(R.layout.fragment_meizhuang, container, false);
+
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        radioGroup= (RadioGroup) view.findViewById(R.id.radioGroup_fuzhuang);
+        radioButton_zonghe= (RadioButton) view.findViewById(R.id.zonghe_fuzhuang);
+        radioButton_zhekou= (RadioButton) view.findViewById(R.id.zhekou_fuzhuang);
+        radioButton_jiage= (RadioButton) view.findViewById(R.id.jiage_fuzhuang);
+        radioButton_zonghe.setOnClickListener(this);
+        radioButton_zonghe.setChecked(true);
+        radioButton_zhekou.setOnClickListener(this);
+        radioButton_jiage.setOnClickListener(this);
+
+        progressBar = (ProgressBar) view.findViewById(R.id.progressbar_fuzhuang);
+        fuZhuangAdapter=new MyFuZhuangAdapter(context,objectList);
+
+        xRecyclerView= (XRecyclerView) view.findViewById(R.id.xrecycler_fuzhuang);
+        xRecyclerView.setAdapter(fuZhuangAdapter);
+        xRecyclerView.setLayoutManager(new LinearLayoutManager(context, OrientationHelper.VERTICAL, false));
+        presenterFuZhuang = new PresenterFuZhuang(this);
+        presenterFuZhuang.LoadFuZhuangData(stringUrl1);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Drawable drawable;
+        switch (v.getId()) {
+            case R.id.zonghe_fuzhuang:
+                radioButton_zonghe.setTextColor(getResources().getColor(R.color.red));
+                radioButton_zhekou.setTextColor(getResources().getColor(R.color.gray));
+                radioButton_jiage.setTextColor(getResources().getColor(R.color.gray));
+                drawable = getResources().getDrawable(R.mipmap.shop_sort_def);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                radioButton_zhekou.setCompoundDrawables(null, null, drawable, null);
+                radioButton_jiage.setCompoundDrawables(null, null, drawable, null);
+                objectList.clear();
+                objectList.addAll(couponBeen);
+                fuZhuangAdapter.notifyDataSetChanged();
+                presenterFuZhuang.LoadFuZhuangData(stringUrl1);
+                break;
+            case R.id.zhekou_fuzhuang:
+                state1 = !state1;
+                radioButton_zonghe.setTextColor(getResources().getColor(R.color.gray));
+                radioButton_zhekou.setTextColor(getResources().getColor(R.color.red));
+                radioButton_jiage.setTextColor(getResources().getColor(R.color.gray));
+
+                drawable = getResources().getDrawable(R.mipmap.shop_sort_def);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                radioButton_jiage.setCompoundDrawables(null, null, drawable, null);
+
+                if (state1) {
+                    drawable = getResources().getDrawable(R.mipmap.shop_sort_asc);
+                    objectList.clear();
+                    couponBeen = mBean.getResult().getCoupon();
+                    objectList.addAll(couponBeen);
+                    fuZhuangAdapter.notifyDataSetChanged();
+                    presenterFuZhuang.LoadFuZhuangData(stringUrl3);
+
+                } else {
+                    drawable = getResources().getDrawable(R.mipmap.shop_sort_desc);
+                    objectList.clear();
+                    couponBeen = mBean.getResult().getCoupon();
+                    objectList.addAll(couponBeen);
+                    fuZhuangAdapter.notifyDataSetChanged();
+                    presenterFuZhuang.LoadFuZhuangData(stringUrl2);
+                }
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                radioButton_zhekou.setCompoundDrawables(null, null, drawable, null);
+
+                break;
+            case R.id.jiage_fuzhuang:
+                state2 = !state2;
+                radioButton_zonghe.setTextColor(getResources().getColor(R.color.gray));
+                radioButton_zhekou.setTextColor(getResources().getColor(R.color.gray));
+                radioButton_jiage.setTextColor(getResources().getColor(R.color.red));
+
+                drawable = getResources().getDrawable(R.mipmap.shop_sort_def);
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                radioButton_zhekou.setCompoundDrawables(null, null, drawable, null);
+
+                if (state2) {
+                    drawable = getResources().getDrawable(R.mipmap.shop_sort_asc);
+                    objectList.clear();
+                    couponBeen = mBean.getResult().getCoupon();
+                    objectList.addAll(couponBeen);
+                    fuZhuangAdapter.notifyDataSetChanged();
+                    presenterFuZhuang.LoadFuZhuangData(stringUrl4);
+
+
+                } else {
+                    drawable = getResources().getDrawable(R.mipmap.shop_sort_desc);
+                    objectList.clear();
+                    couponBeen = mBean.getResult().getCoupon();
+                    objectList.addAll(couponBeen);
+                    fuZhuangAdapter.notifyDataSetChanged();
+                    presenterFuZhuang.LoadFuZhuangData(stringUrl5);
+
+                }
+                drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+                radioButton_jiage.setCompoundDrawables(null, null, drawable, null);
+
+
+                break;
+
+        }
+        xRecyclerView.setLoadingListener(new XRecyclerView.LoadingListener() {
+            @Override
+            public void onRefresh() {
+
+            }
+
+            @Override
+            public void onLoadMore() {
+                page+=1;
+                String s = String.format(stringUrl1,page);
+                presenterFuZhuang.LoadFuZhuangData(s);
+            }
+        });
+    }
+
+    @Override
+    public void showProgress() {
+        progressBar.setVisibility(View.INVISIBLE);
+    }
+
+    @Override
+    public void showLoadFailMsg() {
+
+    }
+
+    @Override
+    public void loadData(FuzhuangBean fuzhuangBean) {
+        objectList.clear();
+        mBean=fuzhuangBean;
+        couponBeen=mBean.getResult().getCoupon();
+        objectList.addAll(couponBeen);
+        fuZhuangAdapter.notifyDataSetChanged();
+        xRecyclerView.loadMoreComplete();
     }
 
 }

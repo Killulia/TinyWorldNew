@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_item_two"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.kingwag.tinyworld.view.view.activity.ItemTwoActivity">
+    <RelativeLayout
+        android:id="@+id/qqqqq"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        >
+        <ImageView
+            android:id="@+id/image_fanhui"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/back_dark"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:id="@+id/text_bb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+
+            />
+
+    </RelativeLayout>
+     <TextView
+         android:id="@+id/wwww"
+         android:layout_below="@+id/qqqqq"
+         android:layout_width="match_parent"
+         android:layout_height="1dp"
+         android:background="@color/gray"/>
+    <com.jcodecraeer.xrecyclerview.XRecyclerView
+        android:id="@+id/xrecycler_itemtwo"
+        android:layout_below="@id/wwww"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ProgressBar
+        android:id="@+id/progressbar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
