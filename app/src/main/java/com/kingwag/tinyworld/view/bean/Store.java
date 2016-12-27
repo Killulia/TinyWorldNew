@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * 店铺信息
  */
-public class StoreInfo
+public class Store
 {
 	protected String Id;
 	protected String name;
@@ -21,16 +21,16 @@ public class StoreInfo
 	}
 
 	//后加的子项集合
-	private List<GoodsInfo> goodsInfos;
+	private List<Goods> goodses;
 
 
-	public StoreInfo(String id, String name) {
+	public Store(String id, String name) {
 		Id = id;
 		this.name = name;
 	}
 
-	public StoreInfo(List<GoodsInfo> goodsInfos, String id, String name) {
-		this.goodsInfos = goodsInfos;
+	public Store(List<Goods> goodses, String id, String name) {
+		this.goodses = goodses;
 		Id = id;
 		this.name = name;
 	}
@@ -62,11 +62,11 @@ public class StoreInfo
 	//后加的子项集合get,set方法
 
 
-	public List<GoodsInfo> getGoodsInfos() {
-		return goodsInfos;
+	public List<Goods> getGoodses() {
+		return goodses;
 	}
 
-	public void setGoodsInfos(List<GoodsInfo> goodsInfos) {
-		this.goodsInfos = goodsInfos;
+	public void setGoodses(List<Goods> goodses) {
+		this.goodses = goodses;
 	}
 }

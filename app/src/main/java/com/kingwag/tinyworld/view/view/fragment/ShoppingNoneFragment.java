@@ -12,6 +12,10 @@ import com.kingwag.tinyworld.R;
 /**
  * A simple {@link Fragment} subclass.
  */
+/**
+ * 购物车账号已登录Fragment
+ */
+
 public class ShoppingNoneFragment extends Fragment {
 
 

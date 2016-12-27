@@ -3,7 +3,7 @@ package com.kingwag.tinyworld.view.bean;
 /**
  * 商品信息
  */
-public class GoodsInfo {
+public class Goods {
     protected String Id;
     protected String name;
     protected boolean isChoosed;
@@ -49,8 +49,8 @@ public class GoodsInfo {
         this.size = size;
     }
 
-    public GoodsInfo(String id, String name, String desc, double price, int count, String color,
-                     String size, int goodsImg, double discountPrice) {
+    public Goods(String id, String name, String desc, double price, int count, String color,
+                 String size, int goodsImg, double discountPrice) {
         Id = id;
         this.name = name;
         this.desc = desc;

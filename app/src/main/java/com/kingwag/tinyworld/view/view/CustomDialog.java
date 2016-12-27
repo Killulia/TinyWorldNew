@@ -12,6 +12,9 @@ import com.kingwag.tinyworld.R;
  * Created by kingwag on 2016/12/26.
  */
 
+/**
+ * 购物车删除自定义Dialog
+ */
 public abstract class CustomDialog extends Dialog {
     public CustomDialog(Context context) {
         super(context, R.style.CustomStyle);

@@ -12,8 +12,8 @@ import android.widget.ExpandableListView;
 import android.widget.TextView;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.adapter.ShopAdapter;
-import com.kingwag.tinyworld.view.bean.GoodsInfo;
-import com.kingwag.tinyworld.view.bean.StoreInfo;
+import com.kingwag.tinyworld.view.bean.Goods;
+import com.kingwag.tinyworld.view.bean.Store;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,17 +21,20 @@ import java.util.List;
  * Created by kingwag on 2016/12/20.
  */
 
-public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.CheckInterface,View.OnClickListener,ShopAdapter.GroupEdtorListener,ShopAdapter.ModifyCountInterface{
+/**
+ * 购物车账号已登录Fragment
+ */
+public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.CheckInterface,View.OnClickListener,ShopAdapter.GroupEditorListener,ShopAdapter.ModifyCountInterface{
 
     private Context mContext;
-    private List<StoreInfo> storeInfos;
+    private List<Store> stores;
     private ExpandableListView expandableListView;
     private ShopAdapter adapter;
     private CheckBox allCheck;//全选按钮
     private double totalPrice = 0.00;// 购买的商品总价
     private int totalCount = 0;// 购买的商品总数量
-    private TextView tvTotalPrice;
-    private TextView tvGoToPay;
+    private TextView tvTotalPrice;//总价格
+    private TextView tvGoToPay;//总数量
 
     @Nullable
     @Override
@@ -56,7 +59,7 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
 
     private void initExpandList(View view) {
         expandableListView = (ExpandableListView)view. findViewById(R.id.exListView);
-        adapter = new ShopAdapter(mContext, storeInfos);
+        adapter = new ShopAdapter(mContext, stores);
         adapter.setmListener(this);
         adapter.setModifyCountInterface(this);// 设置数量增减接口
         adapter.setCheckInterface(this);
@@ -72,17 +75,17 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      * 模拟数据
      */
     private void initData() {
-        storeInfos = new ArrayList<>();
+        stores = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            StoreInfo storeInfo = new StoreInfo(i+"","第"+(i+1)+"号店");
-            List<GoodsInfo> goodsInfos = new ArrayList<>();
+            Store store = new Store(i+"","第"+(i+1)+"号店");
+            List<Goods> goodses = new ArrayList<>();
             for (int j = 0; j < i+1; j++) {
                 int[] img = {R.drawable.goods1, R.drawable.goods2, R.drawable.goods3, R.drawable.goods4, R.drawable.goods5, R.drawable.goods6};
-                GoodsInfo goodsInfo = new GoodsInfo(j+"","商品","第"+(j+1)+"号商品",(j+2)*2.0,j+1,"红","xm",img[j],(j+1)*1.5);
-                goodsInfos.add(goodsInfo);
+                Goods goods = new Goods(j+"","商品","第"+(j+1)+"号商品",(j+2)*2.0,j+1,"红","xm",img[j],(j+1)*1.5);
+                goodses.add(goods);
             }
-            storeInfo.setGoodsInfos(goodsInfos);
-            storeInfos.add(storeInfo);
+            store.setGoodses(goodses);
+            stores.add(store);
         }
     }
 
@@ -93,10 +96,10 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      */
     @Override
     public void checkGroup(int groupPosition, boolean isChecked) {
-        StoreInfo storeInfo = storeInfos.get(groupPosition);
-        List<GoodsInfo> goodsInfos = storeInfo.getGoodsInfos();
-        for (int i = 0; i < goodsInfos.size(); i++) {
-            goodsInfos.get(i).setChoosed(isChecked);
+        Store store = stores.get(groupPosition);
+        List<Goods> goodses = store.getGoodses();
+        for (int i = 0; i < goodses.size(); i++) {
+            goodses.get(i).setChoosed(isChecked);
         }
         if (isAllCheck()) {
             allCheck.setChecked(true);
@@ -115,12 +118,12 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      */
     @Override
     public void checkChild(int groupPosition, int childPosition, boolean isChecked) {
-        GoodsInfo goodsInfo = storeInfos.get(groupPosition).getGoodsInfos().get(childPosition);
-        goodsInfo.setChoosed(isChecked);
+        Goods goods = stores.get(groupPosition).getGoodses().get(childPosition);
+        goods.setChoosed(isChecked);
         if(getGroupState(groupPosition)){
-            storeInfos.get(groupPosition).setChoosed(true);
+            stores.get(groupPosition).setChoosed(true);
         }else {
-            storeInfos.get(groupPosition).setChoosed(false);
+            stores.get(groupPosition).setChoosed(false);
         }
         if (isAllCheck()) {
             allCheck.setChecked(true);
@@ -137,8 +140,8 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      *
      */
     private boolean getGroupState(int groupPosition){
-        for (int i = 0; i < storeInfos.get(groupPosition).getGoodsInfos().size(); i++) {
-            if (storeInfos.get(groupPosition).getGoodsInfos().get(i).isChoosed()==false){
+        for (int i = 0; i < stores.get(groupPosition).getGoodses().size(); i++) {
+            if (stores.get(groupPosition).getGoodses().get(i).isChoosed()==false){
                 return false;
             }
         }
@@ -149,8 +152,8 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      * 判断是否全选
      */
     private boolean isAllCheck(){
-        for (StoreInfo storeInfo:storeInfos ) {
-            if (!storeInfo.isChoosed()){
+        for (Store store : stores) {
+            if (!store.isChoosed()){
                 return false;
             }
         }
@@ -161,13 +164,13 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
      * 全选与反选
      */
     public void doAllCheck(){
-        for (int i = 0; i < storeInfos.size(); i++) {
-            StoreInfo storeInfo = storeInfos.get(i);
-            storeInfo.setChoosed(allCheck.isChecked());
-            List<GoodsInfo> goodsInfos = storeInfo.getGoodsInfos();
-            for (int j = 0; j < goodsInfos.size(); j++) {
-                GoodsInfo goodsInfo = goodsInfos.get(j);
-                goodsInfo.setChoosed(allCheck.isChecked());
+        for (int i = 0; i < stores.size(); i++) {
+            Store store = stores.get(i);
+            store.setChoosed(allCheck.isChecked());
+            List<Goods> goodses = store.getGoodses();
+            for (int j = 0; j < goodses.size(); j++) {
+                Goods goods = goodses.get(j);
+                goods.setChoosed(allCheck.isChecked());
             }
         }
         adapter.notifyDataSetChanged();
@@ -183,14 +186,14 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
     private void calcilate(){
         totalCount = 0;
         totalPrice = 0.00;
-        for (int i = 0; i < storeInfos.size(); i++) {
-            StoreInfo storeInfo = storeInfos.get(i);
-            List<GoodsInfo> goodsInfoList = storeInfo.getGoodsInfos();
-            for (int j = 0; j < goodsInfoList.size(); j++) {
-                GoodsInfo goodsInfo = goodsInfoList.get(j);
-                if (goodsInfo.isChoosed()){
+        for (int i = 0; i < stores.size(); i++) {
+            Store store = stores.get(i);
+            List<Goods> goodsList = store.getGoodses();
+            for (int j = 0; j < goodsList.size(); j++) {
+                Goods goods = goodsList.get(j);
+                if (goods.isChoosed()){
                     totalCount ++;
-                    totalPrice += goodsInfo.getPrice()*goodsInfo.getCount();
+                    totalPrice += goods.getPrice()* goods.getCount();
                 }
             }
         }
@@ -209,16 +212,16 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
 
     @Override
     public void groupEdit(int groupPosition) {
-        storeInfos.get(groupPosition).setEdtor(true);
+        stores.get(groupPosition).setEdtor(true);
         adapter.notifyDataSetChanged();
     }
 
     @Override
     public void doIncrease(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
-        GoodsInfo goodsInfo = (GoodsInfo) adapter.getChild(groupPosition, childPosition);
-        int currentCount = goodsInfo.getCount();
+        Goods goods = (Goods) adapter.getChild(groupPosition, childPosition);
+        int currentCount = goods.getCount();
         currentCount++;
-        goodsInfo.setCount(currentCount);
+        goods.setCount(currentCount);
         ((TextView) showCountView).setText(currentCount + "");
         adapter.notifyDataSetChanged();
         calcilate();
@@ -226,12 +229,12 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
 
     @Override
     public void doDecrease(int groupPosition, int childPosition, View showCountView, boolean isChecked) {
-        GoodsInfo goodsInfo = (GoodsInfo) adapter.getChild(groupPosition, childPosition);
-        int currentCount = goodsInfo.getCount();
+        Goods goods = (Goods) adapter.getChild(groupPosition, childPosition);
+        int currentCount = goods.getCount();
         if (currentCount == 1)
             return;
         currentCount--;
-        goodsInfo.setCount(currentCount);
+        goods.setCount(currentCount);
         ((TextView) showCountView).setText(currentCount + "");
         adapter.notifyDataSetChanged();
         calcilate();
@@ -239,11 +242,11 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
 
     @Override
     public void childDelete(int groupPosition, int childPosition) {
-        storeInfos.get(groupPosition).getGoodsInfos().remove(childPosition);
-        StoreInfo storeInfo = storeInfos.get(groupPosition);
-        List<GoodsInfo> goodsInfoList = storeInfo.getGoodsInfos();
-        if (goodsInfoList.size()==0){
-            storeInfos.remove(groupPosition);
+        stores.get(groupPosition).getGoodses().remove(childPosition);
+        Store store = stores.get(groupPosition);
+        List<Goods> goodsList = store.getGoodses();
+        if (goodsList.size()==0){
+            stores.remove(groupPosition);
         }
         adapter.notifyDataSetChanged();
         calcilate();
