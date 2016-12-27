@@ -54,8 +54,8 @@ public class MineFragment_RegisterActivity extends AppCompatActivity implements 
                 startActivity(intent);
                 break;
             case R.id.tv_yanzhengma:// 获取验证码
-                if ("".equals(mEdtPhoneYanzhengma.getText().toString())) {
-                    Toast.makeText(MineFragment_RegisterActivity.this, "验证码不能为空", Toast.LENGTH_SHORT).show();
+                if ("".equals(mEdtPhoneNumber.getText().toString())) {
+                    Toast.makeText(MineFragment_RegisterActivity.this, "手机号不能为空", Toast.LENGTH_SHORT).show();
                 } else {
                     BmobSMS.requestSMSCode(mEdtPhoneNumber.getText().toString(),"模板名称", new QueryListener<Integer>() {
 
@@ -102,9 +102,9 @@ public class MineFragment_RegisterActivity extends AppCompatActivity implements 
 //
 //                });
 //                Toast.makeText(MineFragment_RegisterActivity.this,"注册成功",Toast.LENGTH_SHORT).show();
-//                finish();
+                finish();
                 break;
-            case R.id.iv_back_register:
+            case R.id.iv_back_register://返回按钮
                 finish();
                 break;
         }
