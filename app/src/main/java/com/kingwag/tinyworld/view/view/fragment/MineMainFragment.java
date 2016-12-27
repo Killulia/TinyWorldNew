@@ -27,6 +27,10 @@ import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
+
+/**
+ * 我的Fragment
+ */
 public class MineMainFragment extends Fragment implements View.OnClickListener{
 //    public static final boolean SWITCH_DATA =false;
     private DataCleanManagerUtils dataCleanManagerUtils;//清除缓存工具类
