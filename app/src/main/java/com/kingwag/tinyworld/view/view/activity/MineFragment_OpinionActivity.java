@@ -4,8 +4,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.EditText;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.kingwag.tinyworld.R;
 
@@ -38,5 +39,8 @@ public class MineFragment_OpinionActivity extends AppCompatActivity implements V
                 startActivity(intent);
                 break;
         }
+        initView();
     }
+
+
 }

@@ -44,6 +44,7 @@
             android:layout_height="wrap_content"
             android:maxLines="1"
             android:textSize="15sp"
+            android:textColor="@color/black"
             />
     </LinearLayout>
             <RelativeLayout
@@ -74,6 +75,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="23dp"
+                        android:textColor="@color/black"
                        />
                         <TextView
                             android:layout_toRightOf="@+id/textview_three2_jinri"
@@ -86,7 +88,7 @@
 
                             />
 
-                </LinearLayout>
+                   </LinearLayout>
                 </LinearLayout>
 
                 <TextView

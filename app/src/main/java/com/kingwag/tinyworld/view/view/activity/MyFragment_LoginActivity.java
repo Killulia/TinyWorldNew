@@ -3,15 +3,20 @@ package com.kingwag.tinyworld.view.view.activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.kingwag.tinyworld.R;
 
-public class MyFragment_LoginActivity extends AppCompatActivity implements View.OnClickListener {
-
+/**
+ * 我的登录页面
+ */
+public class MyFragment_LoginActivity extends AppCompatActivity implements View.OnClickListener{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fragment__login);
+
+
         initView();
     }
 
