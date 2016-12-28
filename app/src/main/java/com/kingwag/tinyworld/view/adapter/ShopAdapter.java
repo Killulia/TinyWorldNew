@@ -14,13 +14,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.Goods;
 import com.kingwag.tinyworld.view.bean.Store;
 import com.kingwag.tinyworld.view.view.CustomDialog;
-
 import java.util.List;
 
 /**

@@ -49,6 +49,14 @@ public class Goods {
         this.size = size;
     }
 
+    public Goods(String name, String desc,double price, double discountPrice, int goodsImg) {
+        this.name = name;
+        this.price = price;
+        this.desc = desc;
+        this.discountPrice = discountPrice;
+        this.goodsImg = goodsImg;
+    }
+
     public Goods(String id, String name, String desc, double price, int count, String color,
                  String size, int goodsImg, double discountPrice) {
         Id = id;

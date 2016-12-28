@@ -14,6 +14,8 @@ import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.adapter.ShopAdapter;
 import com.kingwag.tinyworld.view.bean.Goods;
 import com.kingwag.tinyworld.view.bean.Store;
+import com.kingwag.tinyworld.view.helper.GoodsManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,6 +30,9 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
 
     private Context mContext;
     private List<Store> stores;
+    private List<Store> storeList;
+    private List<List<Goods>> whloeGoods;
+    private GoodsManager manager;//数据库操作类
     private ExpandableListView expandableListView;
     private ShopAdapter adapter;
     private CheckBox allCheck;//全选按钮
@@ -72,7 +77,7 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
     }
 
     /**
-     * 模拟数据
+     * 模拟数据第一版
      */
     private void initData() {
         stores = new ArrayList<>();
@@ -86,6 +91,33 @@ public class ShoppingLoginedFragment extends Fragment implements ShopAdapter.Che
             }
             store.setGoodses(goodses);
             stores.add(store);
+        }
+    }
+
+    /**
+     * 数据源最终版
+     * 一共五个店铺，每个店铺一件商品
+     */
+    private void initDataEnding(){
+        manager = new GoodsManager(mContext);
+        whloeGoods = new ArrayList<>();
+        storeList = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            Store store = new Store(i+"","第"+(i+1)+"号店");
+            List<Goods> goodses = new ArrayList<>();
+            int[] img = {R.drawable.goods1, R.drawable.goods2, R.drawable.goods3, R.drawable.goods4, R.drawable.goods5, R.drawable.goods6};
+            Goods goods = new Goods(i+"","商品","第"+(i+1)+"号商品",(i+2)*2.0,i+1,"红","xm",img[i],(i+1)*1.5);
+            //加到数据库
+            try {
+                manager.insert(goods);
+                goodses.add(goods);
+                whloeGoods.add(goodses);//加到大的用于放进数据库集合
+                store.setGoodses(goodses);
+                storeList.add(store);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
         }
     }
 
