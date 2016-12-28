@@ -1,6 +1,7 @@
 package com.kingwag.tinyworld.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.FuzhuangBean;
+import com.kingwag.tinyworld.view.view.activity.DetailActivity;
 
 import java.util.List;
 
@@ -38,7 +40,7 @@ public class MyFuZhuangAdapter extends RecyclerView.Adapter<MyFuZhuangAdapter.My
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         //if (list.get(position) instanceof  FuzhuangBean.ResultBean.CouponBean) {}
-            FuzhuangBean.ResultBean.CouponBean Bean = (FuzhuangBean.ResultBean.CouponBean) list.get(position);
+            final FuzhuangBean.ResultBean.CouponBean Bean = (FuzhuangBean.ResultBean.CouponBean) list.get(position);
             final String imgUrl = Bean.getCoverImage();
             Glide.with(context)
                     .load(imgUrl)
@@ -55,6 +57,20 @@ public class MyFuZhuangAdapter extends RecyclerView.Adapter<MyFuZhuangAdapter.My
                 holder.textView4.setText("剩余" + Bean.getSurplus() + "张");
             }
             holder.textView5.setText(Bean.getAmount());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailActivity.class);
+                intent.putExtra("image",imgUrl);
+                intent.putExtra("title",Bean.getTitle());
+                intent.putExtra("price",Bean.getPrice());
+                intent.putExtra("oprice",Bean.getOPrice());
+                intent.putExtra("bigimage",imgUrl);
+                intent.putExtra("youhuijia",Bean.getCouponPrice());
+
+                context.startActivity(intent);
+            }
+        });
 
     }
 

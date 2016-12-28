@@ -5,7 +5,7 @@
     android:layout_height="250dp"
     android:padding="5dp"
     android:layout_margin="2dp"
-    android:background="@drawable/other_bac">
+   >
     <ImageView
         android:id="@+id/imageview_twotwo1_activity"
         android:layout_width="match_parent"
@@ -17,7 +17,6 @@
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:layout_margin="5dp"
-        android:background="@drawable/other_bac"
         />
     <LinearLayout
         android:layout_marginLeft="5dp"

@@ -49,12 +49,11 @@ public class Goods {
         this.size = size;
     }
 
-    public Goods(String name, String desc,double price, double discountPrice, int goodsImg) {
+    public Goods(String name,double price, double discountPrice, String imageUrl) {
         this.name = name;
         this.price = price;
-        this.desc = desc;
         this.discountPrice = discountPrice;
-        this.goodsImg = goodsImg;
+       this.imageUrl = imageUrl;
     }
 
     public Goods(String id, String name, String desc, double price, int count, String color,

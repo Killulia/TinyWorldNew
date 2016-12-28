@@ -1,6 +1,7 @@
 package com.kingwag.tinyworld.view.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,6 +15,8 @@ import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.FuzhuangBean;
 import com.kingwag.tinyworld.view.bean.ItemItemBean;
 import com.kingwag.tinyworld.view.bean.JinRiBean;
+import com.kingwag.tinyworld.view.view.activity.DetailActivity;
+import com.kingwag.tinyworld.view.view.activity.ItemTwoTwoActivity;
 
 import java.util.List;
 
@@ -44,7 +47,7 @@ public class MyTwoTwoAdapter extends RecyclerView.Adapter<MyTwoTwoAdapter.MyView
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
 
-        ItemItemBean.ResultBean.ListBean.CouponBean Bean=objectList.get(position);
+        final ItemItemBean.ResultBean.ListBean.CouponBean Bean=objectList.get(position);
         final String imgUrl = Bean.getCoverImage();
         Glide.with(context)
                 .load(imgUrl)
@@ -57,9 +60,20 @@ public class MyTwoTwoAdapter extends RecyclerView.Adapter<MyTwoTwoAdapter.MyView
         holder.textView5.getPaint().setAntiAlias(true);
         holder.textView5.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
         holder.textView6.setText(Bean.getAmount());
-        if (position==1){
-
-        }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context,DetailActivity.class);
+                intent.putExtra("image",imgUrl);
+                intent.putExtra("title",Bean.getTitle());
+                intent.putExtra("price",Bean.getPrice());
+                intent.putExtra("oprice",Bean.getOPrice());
+                intent.putExtra("bigimage",imgUrl);
+                intent.putExtra("youhuijia",Bean.getCouponPrice());
+//                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
 
     }
 

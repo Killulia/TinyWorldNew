@@ -25,7 +25,7 @@ public class ShopDBhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE goods (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,desc TEXT,price DOUBLE,goodsImg INTEGER,discountPrice DOUBLE)");
+        db.execSQL("CREATE TABLE goods (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,desc TEXT,price DOUBLE,imageUrl TEXT,discountPrice DOUBLE)");
     }
 
     @Override

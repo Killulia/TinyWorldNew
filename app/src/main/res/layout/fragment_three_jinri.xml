@@ -3,22 +3,22 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="170dp"
-    android:layout_marginTop="10dp"
-    android:background="@drawable/other_bac">
+    android:layout_margin="5dp"
+    >
     <ImageView
         android:id="@+id/imageview_three_jinri"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginRight="10dp"
-        android:layout_marginLeft="5dp"
         />
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:layout_marginRight="10dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
             <TextView
                 android:id="@+id/text_three1_jinri"
                 android:layout_width="wrap_content"
@@ -43,7 +43,7 @@
                 android:id="@+id/textview_three2_jinri"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="23dp"
+                android:textSize="21dp"
                 android:textColor="@color/black"
                 />
             <TextView
@@ -84,7 +84,7 @@
            <RelativeLayout
                android:layout_width="wrap_content"
                android:layout_height="wrap_content"
-               android:layout_marginLeft="25dp">
+               android:layout_marginLeft="20dp">
                <ImageView
                    android:layout_width="100dp"
                    android:layout_height="15dp"

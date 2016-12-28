@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.JinRiBean;
+import com.kingwag.tinyworld.view.view.activity.DetailActivity;
 
 import java.util.List;
 
@@ -40,7 +41,7 @@ public class MyJinRiThreeAdapter extends RecyclerView.Adapter<MyJinRiThreeAdapte
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(final MyViewHolder holder, final int position) {
 
         JinRiBean.ResultBean.CouponBean Bean=couponBeen.get(position);
         final String imgUrl = Bean.getCoverImage();
@@ -59,6 +60,22 @@ public class MyJinRiThreeAdapter extends RecyclerView.Adapter<MyJinRiThreeAdapte
          holder.textView4.setText("剩余"+couponBeen.get(position).getSurplus()+"张");
         }
          holder.textView5.setText(couponBeen.get(position).getAmount());
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context,DetailActivity.class);
+                    intent.putExtra("image",imgUrl);
+                    intent.putExtra("title",couponBeen.get(position).getTitle());
+                    intent.putExtra("price",couponBeen.get(position).getPrice());
+                    intent.putExtra("oprice",couponBeen.get(position).getOPrice());
+                    intent.putExtra("bigimage",imgUrl);
+                    intent.putExtra("youhuijia",couponBeen.get(position).getCouponPrice());
+                context.startActivity(intent);
+
+            }
+
+        });
 
     }
 

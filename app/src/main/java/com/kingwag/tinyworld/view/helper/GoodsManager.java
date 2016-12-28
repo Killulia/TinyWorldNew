@@ -16,7 +16,7 @@ import java.util.List;
 public class GoodsManager {
 
     //表名常量
-    public static final String TABLE_NAME = "stu";
+    public static final String TABLE_NAME = "goods";
     //字段名常量
     public static final String KEY_ID = "_id";
     //public static final String KEY_CHOOSED = "isChoosed";
@@ -52,7 +52,7 @@ public class GoodsManager {
       //  cv.put(KEY_IMGURL,goods.getImageUrl());
         cv.put(KEY_DESC,goods.getDesc());
         cv.put(KEY_PRICE,goods.getPrice());
-        cv.put(KEY_COUNT,goods.getCount());
+       // cv.put(KEY_COUNT,goods.getCount());
         //cv.put(KEY_POSITION,goods.getPosition());
         cv.put(KEY_COLOR,goods.getColor());
         cv.put(KEY_SIZE,goods.getSize());

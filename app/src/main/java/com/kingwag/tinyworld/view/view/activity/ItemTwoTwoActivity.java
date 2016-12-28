@@ -62,7 +62,7 @@ public class ItemTwoTwoActivity extends AppCompatActivity implements IItemItemVi
     private void initview() {
         progressBar2 = (ProgressBar) findViewById(R.id.progressbar);
         recyclerView = (RecyclerView) findViewById(R.id.xrecycler_itemtwo);
-        myttadapter=new MyTwoTwoAdapter(context,object);
+        myttadapter=new MyTwoTwoAdapter(this,object);
         recyclerView.setAdapter(myttadapter);
         recyclerView.setLayoutManager(new GridLayoutManager(context,2,OrientationHelper.VERTICAL,false));
         presentertwotwo = new PresenterTwoTwo(this);

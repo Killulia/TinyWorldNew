@@ -236,7 +236,7 @@ import java.util.List;
             couponBeen = mBean.getResult().getCoupon();
             objectList.addAll(couponBeen);
             fuZhuangAdapter.notifyDataSetChanged();
-            xRecyclerView.refreshComplete();
+            //xRecyclerView.refreshComplete();
 
         }
 
