@@ -23,6 +23,7 @@ import com.kingwag.tinyworld.view.view.activity.MainActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_OpinionActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
 import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
+import com.kingwag.tinyworld.view.view.activity.Setting;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -182,6 +183,9 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
             //意见反馈
             case R.id.relativelayout_suggestion:
                 intent.setClass(getContext(), MineFragment_OpinionActivity.class);
+                break;
+            case R.id.relativelayout_setting:
+                intent.setClass(getContext(), Setting.class);
                 break;
 
         }

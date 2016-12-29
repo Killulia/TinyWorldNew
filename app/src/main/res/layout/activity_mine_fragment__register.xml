@@ -69,44 +69,44 @@
         android:layout_height="1dp"
         />
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-    android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@color/white">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+    <!--android:layout_marginLeft="8dp"-->
+        <!--android:layout_marginRight="8dp"-->
+        <!--android:background="@color/white">-->
 
-        <EditText
-            android:id="@+id/edt_phone_yanzhengma"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="请输入短信验证码"
-            android:textSize="16sp"
-            android:background="@null"
-            android:layout_marginLeft="10dp"
-            android:inputType="number" />
-        <TextView
-            android:id="@+id/tv_yanzhengma"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:text="@string/yanzhengma"
-            android:layout_marginRight="8dp"
-            android:textSize="16sp"
-            android:layout_centerVertical="true"
-            />
-        <View
-            android:id="@+id/view_line_vertical"
-            android:layout_width="1dp"
-            android:layout_height="26dp"
-            android:background="@color/lightgray2"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="10dp"
-            android:layout_toLeftOf="@id/tv_yanzhengma"
-            />
+        <!--<EditText-->
+            <!--android:id="@+id/edt_phone_yanzhengma"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:hint="请输入短信验证码"-->
+            <!--android:textSize="16sp"-->
+            <!--android:background="@null"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:inputType="number" />-->
+        <!--<TextView-->
+            <!--android:id="@+id/tv_yanzhengma"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:text="@string/yanzhengma"-->
+            <!--android:layout_marginRight="8dp"-->
+            <!--android:textSize="16sp"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--/>-->
+        <!--<View-->
+            <!--android:id="@+id/view_line_vertical"-->
+            <!--android:layout_width="1dp"-->
+            <!--android:layout_height="26dp"-->
+            <!--android:background="@color/lightgray2"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_toLeftOf="@id/tv_yanzhengma"-->
+            <!--/>-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
 
 
 
@@ -130,7 +130,9 @@
             android:textSize="16sp"
             android:background="@null"
             android:layout_marginLeft="10dp"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+
+            />
 
         <ImageView
             android:id="@+id/iv_pwd_visible"
