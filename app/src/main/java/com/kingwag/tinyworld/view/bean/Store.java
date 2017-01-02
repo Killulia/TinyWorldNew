@@ -1,12 +1,13 @@
 package com.kingwag.tinyworld.view.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 店铺信息
  */
 public class Store
-{
+implements Serializable{
 	protected String Id;
 	protected String name;
 	protected boolean isChoosed;

@@ -37,7 +37,7 @@
             android:layout_marginBottom="15dp"
             android:layout_marginTop="13dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/goods1" />
+             />
 
         <RelativeLayout
             android:id="@+id/rl_no_edtor"
@@ -165,14 +165,6 @@
                         android:textColor="@color/text_gray"
                         android:textSize="@dimen/txt_12" />
                 </LinearLayout>
-                <TextView
-                    android:id="@+id/tv_colorsize"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="颜色：黑色；尺码：29"
-                    android:layout_gravity="left"
-                    android:textColor="@color/gray"/>
             </LinearLayout>
 
            <TextView

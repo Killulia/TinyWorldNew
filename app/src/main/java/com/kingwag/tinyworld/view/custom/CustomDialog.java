@@ -1,4 +1,4 @@
-package com.kingwag.tinyworld.view.view;
+package com.kingwag.tinyworld.view.custom;
 
 import android.app.Dialog;
 import android.content.Context;

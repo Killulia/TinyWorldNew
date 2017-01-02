@@ -42,7 +42,6 @@ public class MineFragment_RegisterActivity extends AppCompatActivity implements 
         mIvPwdVisible.setOnClickListener(this);
         findViewById(R.id.btn_register).setOnClickListener(this);//注册按钮
         findViewById(R.id.iv_back_register).setOnClickListener(this);//返回按钮
-
     }
 
     @Override
@@ -53,7 +52,6 @@ public class MineFragment_RegisterActivity extends AppCompatActivity implements 
                 break;
             case R.id.btn_register://注册按钮
                 List<MyUser> users = userManager.queryAll();
-                Log.e("MyLog", "---------users.size" + users.size());
                 String phoneNumberItem ="";
                 for (MyUser userItem : users) {
                     phoneNumberItem= userItem.getMobilePhoneNumber();

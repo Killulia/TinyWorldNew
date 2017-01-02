@@ -127,52 +127,6 @@
 
                         />
                 </LinearLayout>
-                <LinearLayout
-                    android:id="@+id/ll_shar"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="4"
-                    android:orientation="horizontal"
-                    android:visibility="gone"
-                    >
-                    <TextView
-                        android:id="@+id/tv_share"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:layout_weight="1"
-                        android:layout_marginLeft="5dp"
-                        android:text="分享宝贝"
-                        android:textColor="@color/white"
-                        android:background="@color/orange_bg"
-                        android:textSize="16sp"
-                        android:layout_marginRight="5dp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/tv_save"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="移到收藏夹"
-                        android:background="@color/orange_bg"
-                        android:textColor="@color/white"
-                        android:layout_marginRight="5dp"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/tv_delete"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@color/crimson"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:text="删除"
-                        android:textColor="#FAFAFA"
-                        />
-                </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>

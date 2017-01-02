@@ -56,6 +56,7 @@
             android:layout_marginLeft="15dp"
             />
         <TextView
+            android:id="@+id/mine_collect"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/like"
@@ -91,6 +92,7 @@
             android:layout_marginLeft="15dp"
             />
         <TextView
+            android:id="@+id/mine_record"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/histroy"

@@ -14,7 +14,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ShopDBhelper extends SQLiteOpenHelper {
 
-    public static final String DATABASE_NAME = "shopcart.db";
+    public static final String DATABASE_NAME = "shoppingcart.db";
 
     //数据库版本
     public static final int DB_VERSION = 1;
@@ -25,7 +25,9 @@ public class ShopDBhelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE goods (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT,desc TEXT,price DOUBLE,imageUrl TEXT,discountPrice DOUBLE)");
+        db.execSQL("CREATE TABLE goods (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE,price DOUBLE,discountPrice DOUBLE,imageUrl TEXT,style TEXT)");
+        db.execSQL("CREATE TABLE collect (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE,price DOUBLE,discountPrice DOUBLE,imageUrl TEXT,style TEXT)");
+        db.execSQL("CREATE TABLE record (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT UNIQUE,price DOUBLE,discountPrice DOUBLE,imageUrl TEXT,style TEXT)");
     }
 
     @Override

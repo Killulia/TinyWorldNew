@@ -1,21 +1,30 @@
 package com.kingwag.tinyworld.view.bean;
 
+import java.io.Serializable;
+
 /**
  * 商品信息
  */
-public class Goods {
+public class Goods implements Serializable{
     protected String Id;
     protected String name;
     protected boolean isChoosed;
     private String imageUrl;
     private String desc;
     private double price;
-    private int count;
+    private int count = 1;
     private int position;// 绝对位置，只在ListView构造的购物车中，在删除时有效
-    private String color;
-    private String size;
     private int goodsImg;
     private double discountPrice;
+    private String style;
+
+    public String getStyle() {
+        return style;
+    }
+
+    public void setStyle(String style) {
+        this.style = style;
+    }
 
     public double getDiscountPrice() {
         return discountPrice;
@@ -33,41 +42,8 @@ public class Goods {
         this.goodsImg = goodsImg;
     }
 
-    public String getColor() {
-        return color;
-    }
 
-    public void setColor(String color) {
-        this.color = color;
-    }
 
-    public String getSize() {
-        return size;
-    }
-
-    public void setSize(String size) {
-        this.size = size;
-    }
-
-    public Goods(String name,double price, double discountPrice, String imageUrl) {
-        this.name = name;
-        this.price = price;
-        this.discountPrice = discountPrice;
-       this.imageUrl = imageUrl;
-    }
-
-    public Goods(String id, String name, String desc, double price, int count, String color,
-                 String size, int goodsImg, double discountPrice) {
-        Id = id;
-        this.name = name;
-        this.desc = desc;
-        this.price = price;
-        this.count = count;
-        this.color=color;
-        this.size=size;
-        this.goodsImg=goodsImg;
-        this.discountPrice=discountPrice;
-    }
 
     public String getId() {
         return Id;

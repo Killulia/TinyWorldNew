@@ -23,8 +23,8 @@
             android:hint="请输入搜索关键字"
             />
         <ImageView
-            android:layout_width="34dp"
-            android:layout_height="wrap_content"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
             android:layout_gravity="center"
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"

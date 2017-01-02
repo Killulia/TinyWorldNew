@@ -3,7 +3,6 @@ package com.kingwag.tinyworld.view.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-
 import com.kingwag.tinyworld.view.constants.ShopConstants;
 
 /**

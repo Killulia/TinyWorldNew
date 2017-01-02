@@ -15,20 +15,23 @@ import com.kingwag.tinyworld.view.bean.MyUser;
 import com.kingwag.tinyworld.view.helper.UserManager;
 import com.kingwag.tinyworld.view.utils.ShopLoginSharedpreferencesUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
 
 /**
  * 我的登录页面
  */
-public class MyFragment_LoginActivity extends AppCompatActivity implements View.OnClickListener{
-    private EditText mEdtPhoneNumber,mEdtPassword;//用户名密码输入框
+public class MyFragment_LoginActivity extends AppCompatActivity implements View.OnClickListener {
+    private EditText mEdtPhoneNumber, mEdtPassword;//用户名密码输入框
     private UserManager userManager;//用户管理类
     private Context mContext;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_fragment__login);
-
+        mContext = this;
 
         initView();
     }
@@ -54,25 +57,29 @@ public class MyFragment_LoginActivity extends AppCompatActivity implements View.
                 startActivity(intent);
                 break;
             case R.id.btn_login:
-               List<MyUser> users =  userManager.queryAll();
+                List<MyUser> users = userManager.queryAll();
                 String phoneNumber = "";
                 String password = "";
                 for (MyUser userLogin : users) {
                     phoneNumber = userLogin.getMobilePhoneNumber();
                     password = userLogin.getPassword();
-                }
-                if (phoneNumber.equals(mEdtPhoneNumber.getEditableText().toString()) && password.equals(mEdtPassword.getEditableText().toString())) {
-                    ShopLoginSharedpreferencesUtil.putLoginState(mContext,true);
-                    Toast.makeText(MyFragment_LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
-                    finish();
-                }if (!phoneNumber.equals(mEdtPhoneNumber.getEditableText().toString())){
-                ShopLoginSharedpreferencesUtil.putLoginState(mContext,false);
-                Toast.makeText(MyFragment_LoginActivity.this, "手机号不正确", Toast.LENGTH_SHORT).show();
-            }
-                if (!password.equals(mEdtPassword.getEditableText().toString())) {
-                    ShopLoginSharedpreferencesUtil.putLoginState(mContext,false);
-                    Toast.makeText(MyFragment_LoginActivity.this, "密码不正确", Toast.LENGTH_SHORT).show();
+                    if (phoneNumber.equals(mEdtPhoneNumber.getEditableText().toString()) && password.equals(mEdtPassword.getEditableText().toString())) {
+                        ShopLoginSharedpreferencesUtil.putLoginState(mContext, true);
+                        MainActivity.jumpCount = 1;
+                        Toast.makeText(MyFragment_LoginActivity.this, "登录成功", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    if (!phoneNumber.equals(mEdtPhoneNumber.getEditableText().toString())) {
+                        //ShopLoginSharedpreferencesUtil.putLoginState(mContext, false);
+                        MainActivity.jumpCount = 1;
+                        Toast.makeText(MyFragment_LoginActivity.this, "手机号不正确", Toast.LENGTH_SHORT).show();
+                    }
+                    if (!password.equals(mEdtPassword.getEditableText().toString())) {
+                        //ShopLoginSharedpreferencesUtil.putLoginState(mContext, false);
+                        MainActivity.jumpCount = 1;
+                        Toast.makeText(MyFragment_LoginActivity.this, "密码不正确", Toast.LENGTH_SHORT).show();
 
+                    }
                 }
 
                 break;

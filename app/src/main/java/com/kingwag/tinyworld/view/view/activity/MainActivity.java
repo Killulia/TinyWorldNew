@@ -6,10 +6,12 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import com.kingwag.tinyworld.R;
+import com.kingwag.tinyworld.view.utils.ShopLoginSharedpreferencesUtil;
 import com.kingwag.tinyworld.view.view.fragment.IndexMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.MineMainFragment;
 import com.kingwag.tinyworld.view.view.fragment.ShoppingLoginedFragment;
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private ShoppingNoneFragment shoppingNoneFragment;
     private ShoppingLoginedFragment shoppingLoginedFragment;
     private MineMainFragment mineMainFragment;
+    public static int jumpCount = 0;//表示是否经过登陆跳转回来
 
 
     @Override
@@ -39,6 +42,31 @@ public class MainActivity extends AppCompatActivity {
 
         initFrameLayout();
         initView();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+//        Log.d("MainActivity", "jumpcount:"+jumpCount);
+//        if (jumpCount==1){
+//            boolean state = ShopLoginSharedpreferencesUtil.getLoginState(this);
+//            Log.d("MainActivity", "state"+state);
+//            if (state){
+//                Log.d("MainActivity", "gone");
+//                mFragmentTransaction = mFragmentManager.beginTransaction();
+//                mFragmentTransaction.hide(shoppingNoneFragment);
+//                mFragmentTransaction.show(shoppingLoginedFragment);
+//                mFragmentTransaction.commit();
+//
+//            }else {
+//                Log.d("MainActivity", "none");
+//                mFragmentTransaction = mFragmentManager.beginTransaction();
+//                mFragmentTransaction.hide(shoppingLoginedFragment);
+//                mFragmentTransaction.show(shoppingNoneFragment);
+//                mFragmentTransaction.commit();
+//            }
+//        }
+
     }
 
     private void initView() {
@@ -77,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.show(indexMainFragment);
                         //测试暂时换成已登录
+                        mFragmentTransaction.hide(shoppingNoneFragment);
                         mFragmentTransaction.hide(shoppingLoginedFragment);
                         mFragmentTransaction.hide(mineMainFragment);
                         mFragmentTransaction.commit();
@@ -101,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                         mFragmentTransaction = mFragmentManager.beginTransaction();
                         mFragmentTransaction.hide(indexMainFragment);
                         mFragmentTransaction.hide(shoppingNoneFragment);
+                        mFragmentTransaction.hide(shoppingLoginedFragment);
                         mFragmentTransaction.show(mineMainFragment);
                         mFragmentTransaction.commit();
 
@@ -116,4 +146,6 @@ public class MainActivity extends AppCompatActivity {
     private void initFrameLayout() {
         mFragmentManager=getSupportFragmentManager();
     }
+
+
 }

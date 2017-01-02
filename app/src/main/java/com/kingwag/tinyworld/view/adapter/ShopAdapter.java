@@ -14,10 +14,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import com.bumptech.glide.Glide;
 import com.kingwag.tinyworld.R;
 import com.kingwag.tinyworld.view.bean.Goods;
 import com.kingwag.tinyworld.view.bean.Store;
-import com.kingwag.tinyworld.view.view.CustomDialog;
+import com.kingwag.tinyworld.view.helper.GoodsManager;
+import com.kingwag.tinyworld.view.custom.CustomDialog;
 import java.util.List;
 
 /**
@@ -35,13 +37,14 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     private CheckInterface checkInterface;
     private GroupEditorListener mListener;
     private ModifyCountInterface modifyCountInterface;
-
+    private GoodsManager manager;
 
 
     public ShopAdapter(Context context, List<Store> stores) {
         this.context = context;
         this.stores = stores;
         inflater = LayoutInflater.from(context);
+        manager = new GoodsManager(context);
     }
 
     public void setCheckInterface(CheckInterface checkInterface) {
@@ -107,14 +110,16 @@ public class ShopAdapter extends BaseExpandableListAdapter {
         }
         final Store store = stores.get(groupPosition);
         groupHolder.groupName.setText(store.getName());
-        groupHolder.groupCheck.setChecked(store.isChoosed());
+        //groupHolder.groupCheck.setChecked(store.isChoosed());
         groupHolder.groupCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                store.setChoosed(!store.isChoosed());
+                store.setChoosed(((CheckBox) view).isChecked());
                 checkInterface.checkGroup(groupPosition, ((CheckBox) view).isChecked());
             }
         });
+        //后加，上边setchoosed后改，原来:!store.ischecked
+        groupHolder.groupCheck.setChecked(store.isChoosed());
         if (store.isEdtor()) {
             groupHolder.groupEdit.setText("完成");
         } else {
@@ -126,7 +131,7 @@ public class ShopAdapter extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(final int groupPosition, final int childPosition, boolean b, View view, ViewGroup viewGroup) {
+    public View getChildView(final int groupPosition, final int childPosition, boolean b, View view, ViewGroup viewGroup){
         final ChildHolder childHolder;
         if (view == null) {
             view = inflater.inflate(R.layout.item_shopcart_product, viewGroup, false);
@@ -144,9 +149,10 @@ public class ShopAdapter extends BaseExpandableListAdapter {
         }
         final Goods goods = stores.get(groupPosition).getGoodses().get(childPosition);
         if (goods != null) {
-            childHolder.goosIcon.setImageResource(goods.getGoodsImg());
-            childHolder.descripTxt.setText(goods.getDesc());
-            childHolder.styleTxt.setText("颜色：" + goods.getColor() + "," + "大小：" + goods.getSize() + "/kg");
+            ImageView icon = childHolder.goosIcon;
+            Glide.with(context).load(goods.getImageUrl()).into(icon);
+            childHolder.descripTxt.setText(goods.getName());
+            childHolder.styleTxt.setText(goods.getStyle());
             childHolder.priceTxt.setText("￥" + String.valueOf(goods.getPrice()));
             //原价格加横线
             SpannableString spanString = new SpannableString("￥" + String.valueOf(goods.getDiscountPrice()));
@@ -161,7 +167,10 @@ public class ShopAdapter extends BaseExpandableListAdapter {
             childHolder.childCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    goods.setChoosed(!goods.isChoosed());
+                    //原版
+                    //goods.setChoosed(!goods.isChoosed());
+                    goods.setChoosed(((CheckBox) view).isChecked());
+                    childHolder.childCheck.setChecked(((CheckBox) view).isChecked());
                     checkInterface.checkChild(groupPosition, childPosition, ((CheckBox) view).isChecked());
                 }
             });
@@ -182,14 +191,22 @@ public class ShopAdapter extends BaseExpandableListAdapter {
                 public void onClick(View view) {
                     new CustomDialog(context) {
                         @Override
-                        public void out() {
+                        public void out()  {
                             modifyCountInterface.childDelete(groupPosition, childPosition);
+
+
                             dismiss();
+                            notifyDataSetChanged();
+
+
+
                         }
                     }.show();
                 }
+
             });
         }
+
         return view;
     }
 

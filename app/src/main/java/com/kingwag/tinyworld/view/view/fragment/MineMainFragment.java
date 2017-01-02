@@ -13,17 +13,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kingwag.tinyworld.R;
+import com.kingwag.tinyworld.view.bean.Goods;
+import com.kingwag.tinyworld.view.helper.GoodsManager;
+import com.kingwag.tinyworld.view.helper.UserManager;
 import com.kingwag.tinyworld.view.utils.DataCleanManagerUtils;
+import com.kingwag.tinyworld.view.utils.ShopLoginSharedpreferencesUtil;
 import com.kingwag.tinyworld.view.view.activity.MainActivity;
+import com.kingwag.tinyworld.view.view.activity.MineCollect;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_OpinionActivity;
 import com.kingwag.tinyworld.view.view.activity.MineFragment_RegisterActivity;
+import com.kingwag.tinyworld.view.view.activity.MineRecord;
 import com.kingwag.tinyworld.view.view.activity.MyFragment_LoginActivity;
 import com.kingwag.tinyworld.view.view.activity.Setting;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,8 +51,13 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
     private ImageView ivSwitchData;
     private int count_data,count_push;//省流量模式的计数器
     private ImageView ivSwitchPush;//推送通知的开关
+    private Button btlogin;
+    private Button btRegist;
+    private TextView tvUser;
+    private UserManager manager;
+    private ImageView userIcon;
     public MineMainFragment() {
-        // Required empty public constructor
+
     }
 
 
@@ -49,6 +65,7 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        manager = new UserManager(getActivity());
         return inflater.inflate(R.layout.fragment_mine_main, container, false);
 
     }
@@ -63,11 +80,21 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
         //清除缓存的方法
         initCache();
         //登录按钮
-        view.findViewById(R.id.btn_login).setOnClickListener(this);
+        btlogin = (Button) view.findViewById(R.id.btn_login);
+        btlogin.setOnClickListener(this);
+        //用户头像
+        userIcon = (ImageView) view.findViewById(R.id.iv_login_icon);
         //注册按钮
-        view.findViewById(R.id.btn_register).setOnClickListener(this);
+        btRegist = (Button) view.findViewById(R.id.btn_register);
+        btRegist.setOnClickListener(this);
+        //用户名
+        tvUser = (TextView) view.findViewById(R.id.mine_login_name);
         //意见反馈
         view.findViewById(R.id.relativelayout_suggestion).setOnClickListener(this);
+        //收藏
+        view.findViewById(R.id.relativelayout_like).setOnClickListener(this);
+        //浏览记录
+        view.findViewById(R.id.relativelayout_histroy).setOnClickListener(this);
         //清除缓存
         view.findViewById(R.id.relativelayout_clear_cache).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -187,8 +214,29 @@ public class MineMainFragment extends Fragment implements View.OnClickListener{
             case R.id.relativelayout_setting:
                 intent.setClass(getContext(), Setting.class);
                 break;
+            case R.id.relativelayout_like:
+                intent.setClass(getContext(), MineCollect.class);
+                break;
+            case R.id.relativelayout_histroy:
+                intent.setClass(getContext(), MineRecord.class);
+                break;
 
         }
         startActivity(intent);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        boolean state = ShopLoginSharedpreferencesUtil.getLoginState(getActivity());
+        if (state){
+            btlogin.setVisibility(View.GONE);
+            btRegist.setVisibility(View.GONE);
+            tvUser.setVisibility(View.VISIBLE);
+            tvUser.setText("User");
+            userIcon.setImageResource(R.mipmap.user_icon);
+        }
+    }
+
+
 }
