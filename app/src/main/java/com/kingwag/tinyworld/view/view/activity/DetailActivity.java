@@ -37,8 +37,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-        //holder.textView3.getPaint().setAntiAlias(true);
-       // holder.textView3.getPaint().setFlags(Paint. STRIKE_THRU_TEXT_FLAG);
         manager = new GoodsManager(context);
         initData();
         initView();
@@ -154,9 +152,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     Log.d("tag","gone");
                     boolean result = manager.insert(goodCollect,2);
                     if (result){
+                        collect.setImageResource(R.mipmap.shoucang22);
                         Toast.makeText(context, "收藏成功", Toast.LENGTH_SHORT).show();
                     }else {
-
+                        collect.setImageResource(R.mipmap.shoucang11);
                         List<Goods> goodsList = manager.quearyAll(2);
                         for (int i = 0; i < goodsList.size(); i++) {
                             if (title.equals(goodsList.get(i).getName())){

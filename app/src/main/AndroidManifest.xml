@@ -48,7 +48,7 @@
         <activity android:name=".view.view.activity.ItemTwoTwoActivity" />
         <activity android:name=".view.view.activity.DetailActivity" />
         <activity android:name=".view.view.activity.Setting" />
-        <activity android:name=".view.view.activity.MineCollect"></activity>
+        <activity android:name=".view.view.activity.MineCollect"/>
         <activity android:name=".view.view.activity.MineRecord"/>
     </application>
 

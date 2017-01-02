@@ -25,6 +25,7 @@ import okio.Buffer;
  * Created by wanggang on 2016/11/2.
  */
 
+@SuppressWarnings("RedundantCast")
 public class BasicParamsInterceptor implements Interceptor {
 
     Map<String, String> queryParamsMap = new HashMap<>();
@@ -37,6 +38,7 @@ public class BasicParamsInterceptor implements Interceptor {
     }
 
     //拦截
+    @SuppressWarnings("RedundantCast")
     @Override
     public Response intercept(Chain chain) throws IOException {
 
@@ -77,6 +79,7 @@ public class BasicParamsInterceptor implements Interceptor {
 
                 FormBody.Builder formBodyBuilder = new FormBody.Builder();
                 for (Map.Entry<String, String> entry : paramsMap.entrySet()) {
+                    //noinspection RedundantCast
                     formBodyBuilder.add((String) entry.getKey(), (String) entry.getValue());
                 }
 

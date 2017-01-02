@@ -61,11 +61,8 @@ public class GoodsManager {
 
         //关闭数据库
         db.close();
-        if (result==-1){
-            return false;
-        }else {
-            return true;
-        }
+        return result != -1;
+
     }
 
     /**
